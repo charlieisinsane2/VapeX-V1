@@ -1,9 +1,3 @@
-@font-face {
-  font-family: 'Minecraftia';
-  src: url('https://cdn.jsdelivr.net/gh/andybrewer/minecraftia-font/Minecraftia.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 #vape-clickgui {
   position: fixed;
@@ -21,7 +15,7 @@
   display: none;
 }
 
-/* Header bar for dragging */
+
 #vape-clickgui-header {
   background: linear-gradient(90deg, #00ff00 0%, #009900 100%);
   padding: 6px 12px;
@@ -33,7 +27,7 @@
   user-select: none;
 }
 
-/* Categories container (flex row) */
+
 #vape-categories {
   display: flex;
   flex-direction: row;
@@ -42,7 +36,7 @@
   border-top: 1px solid #333;
 }
 
-/* Each category column */
+
 .category {
   flex: 1;
   min-width: 120px;
@@ -54,7 +48,7 @@
   font-size: 13px;
 }
 
-/* Category title (clickable for dropdown toggle) */
+
 .category-title {
   background: #111;
   padding: 8px 10px;
@@ -69,7 +63,6 @@
   background: #005500;
 }
 
-/* Module list (dropdown) */
 .module-list {
   display: none;
   flex-direction: column;
@@ -78,12 +71,12 @@
   background: #111;
 }
 
-/* When category is expanded */
+
 .category.expanded .module-list {
   display: flex;
 }
 
-/* Module item */
+
 .module {
   padding: 6px 10px;
   cursor: pointer;
@@ -97,12 +90,11 @@
   background: #004400;
 }
 
-/* Module name */
+
 .module-name {
   flex-grow: 1;
 }
 
-/* Toggle switch style */
 .toggle-switch {
   position: relative;
   width: 36px;
@@ -130,7 +122,7 @@
   left: 20px;
 }
 
-/* Scrollbar styling */
+
 #vape-categories::-webkit-scrollbar {
   height: 6px;
 }
@@ -142,7 +134,7 @@
   border-radius: 3px;
 }
 
-/* Small fade for disabled modules */
+
 .module.disabled .module-name {
   color: #444;
 }
