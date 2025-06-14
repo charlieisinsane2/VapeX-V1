@@ -49,7 +49,7 @@
   }
 
 
-  const manager = await fetch("https://yourdomain.com/manager.json").then(r => r.json());
+  const manager = await fetch("https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/manager.json").then(r => r.json());
 
 
   const modules = {};
