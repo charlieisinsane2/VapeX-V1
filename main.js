@@ -1,5 +1,5 @@
 (() => {
-  const MANAGER_URL = 'https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/manager.json'; 
+  const MANAGER_URL = 'https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/manager.json'; 
 
 
   let wsInstance = null;
