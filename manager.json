@@ -1,28 +1,35 @@
 {
-  "Combat": [
+  "categories": [
     {
-      "name": "AutoClicker",
-      "enabled": false,
-      "url": "https://raw.githubusercontent.com/you/repo/main/AutoClicker.js"
-    }
-  ],
-  "Movement": [
-    {
-      "name": "JumpReset",
-      "enabled": true,
-      "url": "https://raw.githubusercontent.com/you/repo/main/AutoJump.js"
+      "name": "Combat",
+      "modules": [
+        {
+          "name": "AutoClicker",
+          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/AutoClicker.js"
+        }
+      ]
     },
     {
-      "name": "AutoCrouch",
-      "enabled": false,
-      "url": "https://raw.githubusercontent.com/you/repo/main/AutoCrouch.js"
-    }
-  ],
-  "Render": [
+      "name": "Movement",
+      "modules": [
+        {
+          "name": "AutoJump",
+          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/JumpReset.js"
+        },
+        {
+          "name": "AutoCrouch",
+          "url": "https://raw.githubusercontent.com/yourname/repo/main/AutoCrouch.js"
+        }
+      ]
+    },
     {
-      "name": "LoggerHUD",
-      "enabled": true,
-      "url": "https://raw.githubusercontent.com/you/repo/main/LoggerHUD.js"
+      "name": "Render",
+      "modules": [
+        {
+          "name": "LoggerHUD",
+          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/LoggerHUD.js"
+        }
+      ]
     }
   ]
 }
