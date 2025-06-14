@@ -5,7 +5,7 @@
       "modules": [
         {
           "name": "AutoClicker",
-          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/AutoClicker.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/AutoClicker.js"
         }
       ]
     },
@@ -14,11 +14,11 @@
       "modules": [
         {
           "name": "AutoJump",
-          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/JumpReset.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/JumpReset.js"
         },
         {
           "name": "AutoCrouch",
-          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/AutoCrouch.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/AutoCrouch.js"
         }
       ]
     },
@@ -27,7 +27,7 @@
       "modules": [
         {
           "name": "LoggerHUD",
-          "url": "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/LoggerHUD.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/LoggerHUD.js"
         }
       ]
     }
