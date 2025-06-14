@@ -1,10 +1,10 @@
 (async () => {
-  const managerUrl = "https://yourdomain.com/manager.json"; // replace with your link
+  const managerUrl = "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/manager.json";
 
   const categories = {};
   const loadedModules = {};
 
-  // Load JSON and fetch modules
+
   const manager = await (await fetch(managerUrl)).json();
 
   for (const [category, mods] of Object.entries(manager)) {
@@ -25,7 +25,7 @@
     }
   }
 
-  // Add GUI
+
   const gui = document.createElement("div");
   gui.style.position = "fixed";
   gui.style.top = "30px";
