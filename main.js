@@ -1,78 +1,136 @@
 (async () => {
-  const managerUrl = "https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/manager.json";
+  const OriginalWebSocket = window.WebSocket;
+  window.wsInstance = null;
+  window.yourEntityId = null;
+  window.playerPos = { x: 0, y: 0, z: 0, onGround: false };
 
-  const categories = {};
-  const loadedModules = {};
 
+  function HookedWebSocket(url, protocols) {
+    const ws = protocols ? new OriginalWebSocket(url, protocols) : new OriginalWebSocket(url);
+    window.wsInstance = ws;
 
-  const manager = await (await fetch(managerUrl)).json();
+    const send = ws.send;
+    ws.send = function (...args) {
+      return send.apply(ws, args);
+    };
 
-  for (const [category, mods] of Object.entries(manager)) {
-    categories[category] = mods.map(mod => mod.name);
-    for (const mod of mods) {
-      try {
-        const code = await (await fetch(mod.url)).text();
-        const moduleFn = new Function("module", "exports", code);
-        const module = { exports: {} };
-        moduleFn(module, module.exports);
-        loadedModules[mod.name] = module.exports;
-        if (mod.enabled && typeof module.exports.enable === "function") {
-          module.exports.enable();
-        }
-      } catch (e) {
-        console.error(`[Module Load] ${mod.name} failed:`, e);
+    ws.addEventListener("message", (event) => {
+      if (!(event.data instanceof ArrayBuffer)) return;
+      const bytes = new Uint8Array(event.data);
+      if (bytes[0] === 0x01) {
+        const { value: eid } = readVarInt(bytes, 1);
+        window.yourEntityId = eid;
+        window.addLog?.(`[Client] Entity ID: ${eid}`, "#0ff");
       }
-    }
+      if (bytes[0] === 0x0D) {
+        const dv = new DataView(event.data);
+        window.playerPos.x = dv.getFloat64(1);
+        window.playerPos.y = dv.getFloat64(9);
+        window.playerPos.z = dv.getFloat64(17);
+        window.playerPos.onGround = bytes[33] !== 0;
+      }
+    });
+
+    return ws;
   }
+  HookedWebSocket.prototype = OriginalWebSocket.prototype;
+  window.WebSocket = HookedWebSocket;
+
+  function readVarInt(bytes, pos) {
+    let numRead = 0, result = 0, read;
+    do {
+      read = bytes[pos + numRead];
+      const value = read & 0b01111111;
+      result |= value << (7 * numRead);
+      numRead++;
+      if (numRead > 5) throw new Error("VarInt too big");
+    } while ((read & 0b10000000) !== 0);
+    return { value: result, size: numRead };
+  }
+
+
+  const manager = await fetch("https://yourdomain.com/manager.json").then(r => r.json());
+
+
+  const modules = {};
+  const enabled = {};
+
+
+  const logs = [];
+  const hud = document.createElement('div');
+  Object.assign(hud.style, {
+    position: 'fixed', bottom: '5px', right: '5px', width: '300px', maxHeight: '200px',
+    overflow: 'hidden', fontFamily: 'monospace', fontSize: '12px', color: '#eee',
+    background: 'rgba(0,0,0,0.5)', borderRadius: '8px', padding: '5px', zIndex: 99999
+  });
+  document.body.appendChild(hud);
+
+  window.addLog = (text, color = "#fff") => {
+    logs.push({ text, color, time: Date.now() });
+    if (logs.length > 50) logs.shift();
+  };
+  setInterval(() => {
+    const now = Date.now();
+    hud.innerHTML = logs
+      .filter(log => now - log.time < 10000)
+      .map(log => `<div style="color:${log.color};opacity:${1 - (now - log.time) / 10000}">${log.text}</div>`)
+      .join("");
+  }, 1000);
 
 
   const gui = document.createElement("div");
   gui.style.position = "fixed";
-  gui.style.top = "30px";
-  gui.style.right = "30px";
+  gui.style.top = "50px";
+  gui.style.left = "50px";
+  gui.style.background = "rgba(0,0,0,0.7)";
+  gui.style.border = "1px solid #444";
   gui.style.padding = "10px";
-  gui.style.background = "rgba(0,0,0,0.6)";
-  gui.style.borderRadius = "10px";
-  gui.style.fontFamily = "sans-serif";
-  gui.style.color = "#fff";
-  gui.style.zIndex = 999999;
+  gui.style.borderRadius = "8px";
+  gui.style.zIndex = 99999;
+  gui.style.userSelect = "none";
+  gui.style.fontFamily = "monospace";
+  gui.innerHTML = `<h3 style="margin:0 0 10px 0;color:white;">Closet Client</h3>`;
+  document.body.appendChild(gui);
 
-  for (const [category, mods] of Object.entries(categories)) {
+
+  for (const category of manager.categories) {
     const catDiv = document.createElement("div");
-    const catTitle = document.createElement("div");
-    catTitle.textContent = category;
-    catTitle.style.fontWeight = "bold";
-    catTitle.style.marginBottom = "5px";
-    catDiv.appendChild(catTitle);
+    catDiv.innerHTML = `<h4 style="color:#ccc;">${category.name}</h4>`;
+    gui.appendChild(catDiv);
+    for (const mod of category.modules) {
+      const modBtn = document.createElement("button");
+      modBtn.textContent = mod.name;
+      modBtn.style.display = "block";
+      modBtn.style.marginBottom = "4px";
+      modBtn.style.width = "100%";
+      modBtn.style.background = "#222";
+      modBtn.style.color = "#fff";
+      modBtn.style.border = "none";
+      modBtn.style.padding = "5px";
+      modBtn.style.borderRadius = "4px";
+      let loaded = false;
 
-    for (const modName of mods) {
-      const modDiv = document.createElement("div");
-      const btn = document.createElement("button");
-      btn.textContent = `[${modName}] OFF`;
-      btn.style.marginBottom = "5px";
-      btn.style.cursor = "pointer";
-      btn.style.background = "#222";
-      btn.style.color = "#fff";
-      btn.style.border = "1px solid #444";
-      btn.style.borderRadius = "5px";
-      btn.style.padding = "3px 6px";
-
-      let on = false;
-      btn.onclick = () => {
-        on = !on;
-        btn.textContent = `[${modName}] ${on ? "ON" : "OFF"}`;
-        const mod = loadedModules[modName];
-        if (mod) {
-          if (on && typeof mod.enable === "function") mod.enable();
-          if (!on && typeof mod.disable === "function") mod.disable();
+      modBtn.onclick = async () => {
+        if (!loaded) {
+          const raw = await fetch(mod.url).then(r => r.text());
+          modules[mod.name] = eval(raw);
+          loaded = true;
+        }
+        if (enabled[mod.name]) {
+          modules[mod.name].disable?.();
+          enabled[mod.name] = false;
+          modBtn.style.background = "#222";
+          window.addLog(`[Module] ${mod.name} disabled`, "#f66");
+        } else {
+          modules[mod.name].enable?.();
+          enabled[mod.name] = true;
+          modBtn.style.background = "#0a0";
+          window.addLog(`[Module] ${mod.name} enabled`, "#6f6");
         }
       };
-      modDiv.appendChild(btn);
-      catDiv.appendChild(modDiv);
+
+      catDiv.appendChild(modBtn);
     }
-    catDiv.style.marginBottom = "10px";
-    gui.appendChild(catDiv);
   }
 
-  document.body.appendChild(gui);
 })();
