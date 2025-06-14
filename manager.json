@@ -5,11 +5,11 @@
       "modules": [
         {
           "name": "Blatant Velocity",
-          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/blatantvelo.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/refs/heads/main/blatantvelo.js"
         }
         {
           "name": "AutoClicker",
-          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/AutoClicker.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/refs/heads/main/AutoClicker.js"
         }
       ]
     },
@@ -18,11 +18,11 @@
       "modules": [
         {
           "name": "AutoJump",
-          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/JumpReset.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/refs/heads/main/JumpReset.js"
         },
         {
           "name": "AutoCrouch",
-          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/AutoCrouch.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/refs/heads/main/AutoCrouch.js"
         }
       ]
     },
@@ -31,7 +31,7 @@
       "modules": [
         {
           "name": "LoggerHUD",
-          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/LoggerHUD.js"
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/refs/heads/main/LoggerHUD.js"
         }
         
       ]
