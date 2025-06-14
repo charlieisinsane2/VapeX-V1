@@ -6,7 +6,7 @@ module.exports = {
       const bytes = new Uint8Array(event.data);
       const id = bytes[0];
 
-      if (id === 0x12) { // Entity Velocity
+      if (id === 0x12) { 
         try {
           const entityId = (() => {
             let numRead = 0;
