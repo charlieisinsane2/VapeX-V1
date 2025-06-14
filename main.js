@@ -90,7 +90,16 @@
   gui.style.userSelect = "none";
   gui.style.fontFamily = "monospace";
   gui.innerHTML = `<h3 style="margin:0 0 10px 0;color:white;">Closet Client</h3>`;
-  document.body.appendChild(gui);
+  gui.style.display = "none";
+document.body.appendChild(gui);
+
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "ShiftRight") {
+    gui.style.display = gui.style.display === "none" ? "block" : "none";
+    window.addLog?.(`[ClickGUI] ${gui.style.display === "block" ? "Opened" : "Closed"}`, "#9cf");
+  }
+});
 
 
   for (const category of manager.categories) {
