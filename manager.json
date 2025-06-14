@@ -1,0 +1,28 @@
+{
+  "Combat": [
+    {
+      "name": "AutoClicker",
+      "enabled": false,
+      "url": "https://raw.githubusercontent.com/you/repo/main/AutoClicker.js"
+    }
+  ],
+  "Movement": [
+    {
+      "name": "JumpReset",
+      "enabled": true,
+      "url": "https://raw.githubusercontent.com/you/repo/main/AutoJump.js"
+    },
+    {
+      "name": "AutoCrouch",
+      "enabled": false,
+      "url": "https://raw.githubusercontent.com/you/repo/main/AutoCrouch.js"
+    }
+  ],
+  "Render": [
+    {
+      "name": "LoggerHUD",
+      "enabled": true,
+      "url": "https://raw.githubusercontent.com/you/repo/main/LoggerHUD.js"
+    }
+  ]
+}
