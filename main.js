@@ -211,9 +211,10 @@
   }
 
   async function main() {
-    try {
-      await loadCSS('https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/vape-clickgui.css');
-      const manager = await loadManager('https://github.com/charlieisinsane2/VapeX-V1/raw/refs/heads/main/manager.json');
+  try {
+        await loadCSS('https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/vape-clickgui.css');
+        const manager = await loadManager('https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/manager.json');
+
       createGUI();
       createCategories(manager.categories);
       for (const category of manager.categories) {
