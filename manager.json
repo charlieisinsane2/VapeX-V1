@@ -4,6 +4,10 @@
       "name": "Combat",
       "modules": [
         {
+          "name": "Blatant Velocity",
+          "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/blatantvelo.js"
+        }
+        {
           "name": "AutoClicker",
           "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/AutoClicker.js"
         }
@@ -29,6 +33,7 @@
           "name": "LoggerHUD",
           "url": "https://raw.githubusercontent.com/charlieisinsane2/VapeX-V1/main/LoggerHUD.js"
         }
+        
       ]
     }
   ]
